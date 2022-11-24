@@ -9,7 +9,7 @@ resource "local_file" "ansible_inventory" {
 }
 resource "null_resource" "playbook_exec" {
   provisioner "local-exec" {
-    working_dir = "${path.module}/../../ansible/"
+    working_dir = "${path.module}/../../" # Ansible root working directory
     # command = "ansible-playbook ../playbooks/deploy-postgres.yaml -i ../inventory/lab" # for valid hosts
     command = "pwd && docker run --rm -v $PWD:/tmp/playbook --entrypoint ansible-playbook jmal98/ansiblecm:6.2.0 -i inventory/lab ${var.ansible_command}"
     interpreter = ["/bin/bash", "-c"]
