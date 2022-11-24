@@ -1,0 +1,7 @@
+# vars/jenkins_plugins.yml
+---
+jenkins_plugins:
+- { name: "ace-editor", version: "1.1" }
+- { name: "ansicolor", version: "0.6.2" }
+- { name: "git", version: "3.9.3" }
+- { name: "ssh-agent", version: "1.17" }

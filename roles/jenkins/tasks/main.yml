@@ -1,0 +1,11 @@
+---
+# tasks file for jenkins
+- include_tasks: install-jenkins.yaml
+- include_tasks: install-jenkins-plugins.yml
+- include_tasks: configure-jenkins.yaml
+- include_tasks: skip-setup-wizard.yaml
+- include_tasks: configure-plugins.yaml
+- include_tasks: restart-jenkins.yaml
+- include_tasks: wait-for-jenkins.yml
+- include_tasks: trigger-seed-job.yaml
+- include_tasks: verify-seed-job-success.yml

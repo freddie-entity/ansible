@@ -1,0 +1,19 @@
+# tasks/install-jenkins-plugins.yml
+---
+- name: "Include plugin list"
+  include_vars: "vars/jenkins_plugins.yml"
+
+- name: "Install plugins using specified versions"
+  get_url:
+    url: "http://updates.jenkins.io/download/plugins/\
+      {{ item.name }}/{{ item.version }}/{{ item.name }}.hpi"
+    dest: "/var/lib/jenkins/plugins/{{ item.name }}.hpi"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+  register: get_url_result
+  until: get_url_result is succeeded
+  retries: 3
+  delay: 10
+  with_items:
+  - "{{ jenkins_plugins }}"

@@ -1,0 +1,12 @@
+# tasks/configure-plugins.yaml
+---
+- name: "Install plugins configuration"
+  template:
+    src: "files/config/{{ item }}.tpl"
+    dest: "/var/lib/jenkins/{{ item }}"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+  with_items:
+    - 'gerrit-trigger.xml'
+    - 'locale.xml'

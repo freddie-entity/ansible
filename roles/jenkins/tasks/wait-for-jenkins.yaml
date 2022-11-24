@@ -1,0 +1,10 @@
+# tasks/wait-for-jenkins.yml
+---
+- name: "Wait for Jenkins to come up"
+  uri:
+    url: "http://127.0.0.1:{{ jenkins_http_port }}/"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 50
+  delay: 5

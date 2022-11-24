@@ -1,0 +1,11 @@
+# tasks/verify-seed-job-success.yml
+---
+- name: "Verify seed job result"
+  uri:
+    url: "http://127.0.0.1:{{ jenkins_http_port }}\
+      /job/Create-jobs/lastBuild/api/json"
+    return_content: yes
+  register: output
+  until: output.json.result != 'SUCCESS'
+  retries: 50
+  delay: 5

@@ -1,0 +1,6 @@
+# tasks/restart-jenkins.yaml
+---
+- name: "Restart Jenkins"
+  service:
+    name: jenkins
+    state: restarted

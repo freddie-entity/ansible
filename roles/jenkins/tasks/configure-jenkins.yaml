@@ -1,0 +1,23 @@
+# tasks/configure-jenkins.yaml
+---
+- name: "Create Jenkins Configuration-as-Code directory"
+  file:
+    path: /etc/jcasc
+    state: directory
+    owner: jenkins
+
+- name: "Fill and copy template based JCasC files"
+  template:
+    src: "files/jcasc/{{ item }}.tpl"
+    dest: "/etc/jcasc/{{ item }}"
+    owner: jenkins
+    mode: 0644
+  with_items:
+    - 'main.yaml'
+
+- name: "Modify Jenkins service file"
+  lineinfile:
+    path: /etc/init.d/jenkins
+    insertafter: "^DAEMON_ARGS="
+    line: "DAEMON_ARGS=\"${DAEMON_ARGS}\
+      ––env=CASC_JENKINS_CONFIG=/etc/jcasc/\""

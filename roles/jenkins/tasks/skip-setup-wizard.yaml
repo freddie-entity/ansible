@@ -1,0 +1,9 @@
+# tasks/skip-setup-wizard.yaml
+---
+- name: "Insert script to skip Jenkins setup wizard"
+  copy:
+    src: files/skip-setup-wizard.groovy
+    dest: /var/lib/jenkins/init.groovy.d/skip-setup-wizard.groovy
+    owner: jenkins
+    group: jenkins
+    mode: 0644

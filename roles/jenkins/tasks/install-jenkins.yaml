@@ -1,0 +1,12 @@
+# tasks/install-jenkins.yml
+---
+- name: Install dependencies
+  include_vars: "vars/jenkins_vars.yaml"
+
+- name: "Install curl"
+  apt:
+    name: 'curl'
+
+- name: "Install Jenkins"
+  include_role:
+    name: geerlingguy-jenkins

@@ -1,0 +1,15 @@
+# tasks/trigger-seed-job.yaml
+---
+- name: "Get CSRF crumb for requests"
+  uri:
+    url: "http://127.0.0.1:{{ jenkins_http_port }}/crumbIssuer/api/json"
+    return_content: yes
+  register: crumb
+
+- name: "Trigger seed job"
+  uri:
+    url: "http://127.0.0.1:{{ jenkins_http_port }}/job/Create-jobs/build"
+    method: POST
+    status_code: 201
+    headers:
+      'Jenkins-Crumb': "{{ crumb.json.crumb }}"

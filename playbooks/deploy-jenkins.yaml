@@ -1,0 +1,4 @@
+- name: Deploy something
+  hosts: containers
+  roles:
+    - jenkins
